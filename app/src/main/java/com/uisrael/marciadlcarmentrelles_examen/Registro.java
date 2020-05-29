@@ -12,6 +12,7 @@ public class Registro extends AppCompatActivity {
 
     Bundle usuario_registrado;
     EditText nombre, monto_inicial, pago_mensual, usuario;
+    Double totalPagar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,11 @@ public class Registro extends AppCompatActivity {
         }
         public void guardar (View v){
             Intent registra = new Intent(this,Encuesta.class);
-            startActivity(registra);
             Toast.makeText(getApplicationContext(), "Elemento guardado con exito", Toast.LENGTH_SHORT).show();
             registra.putExtra("nombres",nombre.getText().toString());
+            registra.putExtra("usuario",usuario.getText().toString());
+            registra.putExtra("totalPagar",String.valueOf(totalPagar));
+            startActivity(registra);
         }
         public void Calcular (View v) {
             double datoinicial;
@@ -45,5 +48,6 @@ public class Registro extends AppCompatActivity {
             pmensual = datomensual / 3;
             stotal = pmensual + 90;
             pago_mensual.setText(Double.toString(stotal));
+            totalPagar = montoinicial + stotal;
     }
 }
